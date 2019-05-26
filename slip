@@ -1,0 +1,271 @@
+/* 
+MODULE #1 - Variable Introduction
+lesson #1 CONST VS VAR VS LET
+const = constant variable throughout the whole window, will not update or change
+var = scoped to a specific fxn, if not then it is scoped to the entire window 
+(note if you scope var to a specifix fxn, it is not defined outside of that fxn)
+let = stay in a block scope
+
+lesson #2-3
+let and const cannot be updated, but const can.
+
+<body>
+<script>
+  const key = 'abc123';
+  let points = 50;
+  let winner = false;
+  const person = {
+    name: 'Wes',
+    age: 28
+  }
+  const wes = Object.freeze(person);
+  NOTE THAT THIS FXN IS TO FREEZE THE VARIABLE SO THAT IT CANT BE CHANGED!
+</script>
+</body>
+
+lesson #4 temporal dead zone
+
+TLDR; var variables can be accessed before they are defined but will show up undefined.
+temporal dead zone means you cannot access a variable before it's defined (const)
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>let and const real world</title>
+</head>
+<body>
+<script>
+  console.log(pizza);
+  const pizza = 'Deep Dish 🍕🍕🍕';
+</script>
+</body>
+</html>
+
+lesson #5 is var dead?
+use const and use let if rebinding is needed. ther e are two theories.
+
+*/
+
+/* MODULE #2 ARROW FXN INTRODUCTION
+lesson #1 increase conciseness and will not rebind values inside another function.
+
+</head>
+<body>
+<script>
+const race = '100m Dash';
+const winners = ['Hunter Gath', 'Singa Song', 'Imda Bos'];
+const win = winners.map((winner, i) => ({name: winner, race, place: i + 1}));
+const ages = [23,62,45,234,2,62,234,62,34];
+const old = ages.filter(age => age >= 60);
+console.log(old);
+</script>
+</body>
+</html>
+
+lesson #2 AND this, graphic design components
+this section is a little confusing. i will come back to this, but the point of this lesson
+is to explain how arrow fxns play a key role within graphic html. editing the arrow fxn will edit transitional uses.
+
+lesson #3 default arguments
+JUST SET THE VARIABLES WHEN U CREATE THE FXN
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Default Arguments</title>
+</head>
+<body>
+<script>
+  function calculateBill(total, tax = 0.13, tip = 0.15) {
+    return total + (total * tax) + (total * tip);
+  }
+  const totalBill = calculateBill(100, undefined, 0.25);
+  console.log(totalBill);
+</script>
+</body>
+</html>
+
+lesson #4 when to not use arrow fxns
+1. they keyword this is not bound to the arrow fxn, which u must equal the this to the button
+
+2. When you need a method to bind to an object
+  const person = {
+    points: 23,
+    score() {
+      console.log(this);
+      this.points++;
+      
+      this is not equal because it's not bound, so this is equal to window.
+ 
+ 3. when you add a prototype method
+ 
+ note: haven't learned about classes
+ 
+   class Car {
+    constructor(make, colour) {
+      this.make = make;
+      this.colour = colour;
+    }
+  }
+  const beemer = new Car('bmw', 'blue');
+  const subie = new Car('Subaru', 'white');
+  Car.prototype.summarize = function() {
+     return `This car is a ${this.make} in the colour ${this.colour}`;
+  };
+  
+  will make it undefined because we explicitly need this so use a reg fxn.
+  
+  4. when you need arguments object.
+  
+  */
+
+  MODULE #3 
+  LESSON #1 TEMPLATE STRING INTRODUCTION
+  
+  const name = 'Snickers'
+  const age = 2
+  const sentence = `my dog ${name} is ${age*7} years old.`
+  
+  look at the efficiency!
+  
+  LESSON #2 Creating HTML fragments with Template Literals
+  
+  basic information
+  --
+ <body>
+<script>
+  const person = {
+    name: 'Wes',
+    job: 'Web Developer',
+    city: 'Hamilton',
+    bio: 'Wes is a really cool guy that loves to teach web development!',
+  };
+  const markup = `
+    <div class="person">
+      <h2>
+        ${person.name}
+        <span class="job">${person.job}</span>
+      </h2>
+      <p class="location">${person.city}</p>
+      <p class="bio">${person.bio}</p>
+    </div>
+  `;
+  console.log(markup);
+  document.body.innerHTML = markup;
+</script>
+</body>
+
+TURNANARY OPERATOR IF THERE IS NO FEATURING!!
+
+<script>
+  const song = {
+    name: 'Dying to live',
+    artist: 'Tupac',
+    featuring: 'Biggie Smalls'
+  };
+  const markup = `
+    <div class="song">
+      <p>
+        ${song.name} — ${song.artist}
+        ${song.featuring ? `(Featuring ${song.featuring})` : ''}
+      </p>
+    </div>
+  `;
+  document.body.innerHTML = markup;
+</script>
+
+LESSON #3 TAGGED TEMPLATE LITERALS
+function will take in the string and will actually take the values
+
+function() highlight (strings, ...){
+
+  const name = 'Snickers'
+  const age = 2
+  const sentence = `my dog ${name} is ${age*7} years old.`
+  
+  MODULE #4 ADDITIONAL STRING IMPROVEMENTS
+  
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New String Methods</title>
+</head>
+<body>
+
+<script>
+const course = 'RFB2';
+const flightNumber = '20-AC2018-jz';
+const accountNumber = '825242631RT0001';
+const make = 'BMW';
+const model = 'x5';
+const colour = 'Royal Blue';
+
+// .startsWith() you can do startsWith('AC', 3)
+// .endsWith()
+// .includes()
+// .repeat() allows u to repeat as many times
+
+function leftPad(str, length = 20) {
+  return `→ ${' '.repeat(length - str.length)}${str}`;
+}
+console.log(leftPad(make));
+console.log(leftPad(model));
+console.log(leftPad(colour));
+</script>
+
+</body>
+</html>
+
+*/
+
+/* MODULE #5 DESTRUCTURING
+
+Lesson #1 destructuring objects
+
+ const person = {
+    first: 'Wes',
+    last: 'Bos',
+    country: 'Canada',
+    city: 'Hamilton',
+    twitter: '@wesbos'
+  };
+  
+const { first, last, twitter } = person;
+
+
+  const wes = {
+    first: 'Wes',
+    last: 'Bos',
+    links: {
+      social: {
+        twitter: 'https://twitter.com/wesbos',
+        facebook: 'https://facebook.com/wesbos.developer',
+      },
+      web: {
+        blog: 'https://wesbos.com'
+      }
+    }
+  };
+  const { twitter: tweet, facebook: fb } = wes.links.social;
+  const settings = { width: 300, color: 'black' }  // height, fontSize
+  const { width = 100, height = 100, color = 'blue', fontSize = 25} = settings;
+
+Lesson #2 destructuring arrays
+square brackets array
+curly brackets object
+
+<script>
+  const details = ['Wes Bos', 123, 'wesbos.com'];
+  const [name, id, website] = details;
+  console.log(name, id, website);
+  const data = 'Basketball,Sports,90210,23,wes,bos,cool';
+  const [itemName, category, sku, inventory] = data.split(','); 
+  // NOTE DATA SPLITTING
+  const team = ['Wes', 'Harry', 'Sarah', 'Keegan', 'Riker'];
+  const [captain, assistant, ...players] = team;
+</script>
+
+  
+
